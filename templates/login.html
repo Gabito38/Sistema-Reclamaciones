@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Iniciar Sesión</h2>
+<form method="post" class="mt-3">
+    <div class="mb-3">
+        <label class="form-label">Correo</label>
+        <input type="email" name="correo" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-dark">Ingresar</button>
+    <a href="{{ url_for('registro') }}" class="btn btn-link">Registrarse</a>
+</form>
+{% endblock %}

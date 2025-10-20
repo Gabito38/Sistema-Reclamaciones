@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Detalle del Reclamo #{{ reclamo.id }}</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ reclamo.asunto }}</h5>
+        <p class="card-text">{{ reclamo.descripcion }}</p>
+        <p class="text-muted"><b>Fecha:</b> {{ reclamo.fecha }}</p>
+        <p>
+            <b>Estado:</b>
+            {% if reclamo.estado == 'pendiente' %}
+                <span class="badge bg-warning text-dark">Pendiente</span>
+            {% else %}
+                <span class="badge bg-success">Resuelto</span>
+            {% endif %}
+        </p>
+    </div>
+</div>
+
+<h5>Respuestas</h5>
+{% if respuestas %}
+    <ul class="list-group mb-3">
+    {% for r in respuestas %}
+        <li class="list-group-item">
+            <p>{{ r.contenido }}</p>
+            <small class="text-muted">Fecha: {{ r.fecha_respuesta }}</small>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <div class="alert alert-secondary">No hay respuestas todavía.</div>
+{% endif %}
+
+{% if session.get('tipo') == 'admin' %}
+    <form method="post" action="{{ url_for('responder', id=reclamo.id) }}">
+        <div class="mb-3">
+            <label class="form-label">Responder</label>
+            <textarea name="contenido" class="form-control" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar Respuesta</button>
+    </form>
+{% endif %}
+
+<!-- 🔙 Botón para volver al panel principal -->
+<div class="mt-4">
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">← Volver al Inicio</a>
+</div>
+{% endblock %}

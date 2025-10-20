@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nuevo Reclamo</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Asunto</label>
+        <input type="text" name="asunto" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea name="descripcion" rows="4" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Registrar</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Volver</a>
+</form>
+{% endblock %}

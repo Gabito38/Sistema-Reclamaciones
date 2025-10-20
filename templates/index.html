@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Panel de Reclamos</h2>
+
+{% if tipo == 'usuario' %}
+    <a href="{{ url_for('nuevo_reclamo') }}" class="btn btn-primary mb-3">➕ Nuevo Reclamo</a>
+{% endif %}
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Asunto</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for r in reclamos %}
+        <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.asunto }}</td>
+            <td>{{ r.descripcion[:40] }}...</td>
+            <td>{{ r.fecha }}</td>
+            <td>
+                {% if r.estado == 'pendiente' %}
+                    <span class="badge bg-warning text-dark">Pendiente</span>
+                {% else %}
+                    <span class="badge bg-success">Resuelto</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('reclamo_detalle', id=r.id) }}" class="btn btn-sm btn-info">Ver</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if not reclamos %}
+    <div class="alert alert-secondary">No hay reclamos registrados.</div>
+{% endif %}
+{% endblock %}

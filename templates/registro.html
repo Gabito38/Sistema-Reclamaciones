@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Registro de Usuario</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" name="nombre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Correo</label>
+        <input type="email" name="correo" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tipo de usuario</label>
+        <select name="tipo" class="form-select" required>
+            <option value="usuario">Usuario</option>
+            <option value="admin">Administrador</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Registrar</button>
+    <a href="{{ url_for('login') }}" class="btn btn-secondary">Volver</a>
+</form>
+{% endblock %}
